@@ -6,7 +6,7 @@ import MsgBemVindo from "./components/MsgBemVindo.vue";
 <template>
   <header>
     <img
-      alt="Vue logo"
+      alt="logo"
       class="logo"
       src="@/assets/logo.svg"
       width="125"
@@ -39,7 +39,7 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
+  font-size: 30px;
   text-align: center;
   margin-top: 2rem;
 }
