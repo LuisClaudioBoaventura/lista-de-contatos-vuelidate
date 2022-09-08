@@ -4,21 +4,20 @@
       <DocumentationIcon />
     </template>
     <template #heading>Nome</template>
-    <div>
-      <form id="contato-form">
-        <div class="imput-container">
-          <label for="nome"> Olá {{ nome }}</label>
-          <input
-            type="text"
-            id="nome"
-            name="nome"
-            v-model="nome"
-            placeholder="Digite seu nome aqui"
-          />
-          <div v-if="v$.nome.$error">Campo nome tem um erro</div>
-        </div>
-      </form>
-    </div>
+
+    <form id="contato-form">
+      <div class="imput-container">
+        <label for="nome"> Olá {{ nome }}</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          v-model="nome"
+          placeholder="Digite seu nome aqui"
+        />
+        <div v-if="v$.nome.$error">Campo nome tem um erro</div>
+      </div>
+    </form>
   </CardItem>
 
   <CardItem>
