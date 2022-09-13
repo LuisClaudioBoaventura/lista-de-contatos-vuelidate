@@ -1,106 +1,147 @@
 <template>
-  <CardItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Nome</template>
+  <form @submit.prevent="onSubmit">
+    <!-- Icone -->
 
-    <form id="contato-form">
-      <div class="imput-container">
-        <label for="nome"> Olá {{ nome }}</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          v-model="nome"
-          placeholder="Digite seu nome aqui"
-        />
-        <div v-if="v$.nome.$error">Campo nome tem um erro</div>
-      </div>
-    </form>
-  </CardItem>
+    <CardItem>
+      <template #icon>
+        <DocumentationIcon />
+      </template>
 
-  <CardItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Sobrenome</template>
-    <div>
-      <form id="contato-form">
+      <!-- primeiro nome -->
+
+      <template #heading>Nome</template>
+
+      <div class="form-group">
         <div class="imput-container">
-          <label for="nome"> Voce faz parte da familia : {{ sobrenome }}</label>
+          <label for=""> Olá {{ PrimeiroNome }}</label>
           <input
+            class="form-control"
             type="text"
-            id="sobrenome"
-            name="sobrenome"
-            v-model="sobrenome"
+            v-model.trim="v$.PrimeiroNome.$model"
+            placeholder="Digite seu nome aqui"
+          />
+        </div>
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.PrimeiroNome.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+    </CardItem>
+    <!-- -------------------------------------------------- -->
+    <!-- Icone -->
+
+    <CardItem>
+      <template #icon>
+        <ToolingIcon />
+      </template>
+
+      <!-- Sobrenome -->
+
+      <template #heading>Sobrenome</template>
+
+      <div class="form-group">
+        <div class="imput-container">
+          <label for=""> Voce faz parte da familia : {{ Sobrenome }}</label>
+          <input
+            class="form-control"
+            type="text"
+            v-model="v$.Sobrenome.$model"
             placeholder="Digite seu Sobrenome aqui"
           />
         </div>
-      </form>
-    </div>
-  </CardItem>
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.Sobrenome.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+    </CardItem>
+    <!-- -------------------------------------------------- -->
+    <!-- Icone -->
 
-  <CardItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Email</template>
-    <div>
-      <form id="contato-form">
+    <CardItem>
+      <template #icon>
+        <EcosystemIcon />
+      </template>
+
+      <!-- Email -->
+
+      <template #heading>Email</template>
+      <div class="form-group">
         <div class="imput-container">
-          <label for="email"> Seu melhor email {{ email }}</label>
+          <label for=""> Seu melhor email é: {{ Email }}</label>
           <input
+            class="form-control"
             type="text"
-            id="email"
-            name="email"
-            v-model="email"
+            v-model="v$.Email.$model"
             placeholder="Digite seu email aqui"
           />
         </div>
-        <!--  <p>
-          <input v-model="sobrenome" v-if="v$.email.$error" />
-          Campo email possui um erro
-        </p> -->
-      </form>
-    </div>
-  </CardItem>
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.Email.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+    </CardItem>
 
-  <CardItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Idade</template>
-    <div>
-      <form id="contato-form">
+    <!-- -------------------------------------------------- -->
+    <!-- Icone -->
+
+    <CardItem>
+      <template #icon>
+        <CommunityIcon />
+      </template>
+
+      <!-- idade -->
+
+      <template #heading>Idade</template>
+
+      <div class="form-group">
         <div class="imput-container">
-          <label for="nome"> Você já comemorou {{ idade }} primaveras</label>
+          <label for=""> Você já comemorou {{ Idade }} primaveras</label>
           <input
-            type="text"
-            id="idade"
-            name="idade"
-            v-model="idade"
+            class="form-control"
+            type="number"
+            v-model="v$.Idade.$model"
             placeholder="Digite sua idade aqui"
           />
         </div>
-      </form>
-    </div>
-  </CardItem>
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.Idade.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+    </CardItem>
 
-  <CardItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Telefone</template>
-    <div>
-      <form id="contato-form">
+    <!-- -------------------------------------------------- -->
+    <!-- Icone -->
+
+    <CardItem>
+      <template #icon>
+        <CommunityIcon />
+      </template>
+
+      <!-- Telefone -->
+
+      <template #heading>Telefone</template>
+
+      <div class="form-group">
         <div class="imput-container">
-          <label for="telefone"> Seu melhor telefone é : {{ telefone }} </label>
+          <label for=""> Seu melhor telefone é : {{ Telefone }} </label>
           <input
             type="text"
-            id="telefone"
-            name="telefone"
-            v-model="telefone"
+            v-model="v$.Telefone.$model"
             placeholder="Digite seu telefone aqui"
           />
           <!-- Botão de adcionar -->
@@ -134,84 +175,123 @@
             />
           </svg>
         </div>
-      </form>
-    </div>
-  </CardItem>
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.Telefone.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+    </CardItem>
 
-  <CardItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>CPF</template>
-    <div>
-      <form id="contato-form">
+    <!-- -------------------------------------------------- -->
+    <!-- Icone -->
+
+    <CardItem>
+      <template #icon>
+        <SupportIcon />
+      </template>
+
+      <!-- CPF -->
+
+      <template #heading>CPF</template>
+      <div class="form-group">
         <div class="imput-container">
-          <label for="cpf"> Para o estado voce é o numero : {{ cpf }}</label>
+          <label for=""> Para o estado voce é o numero : {{ Cpf }}</label>
           <input
             type="text"
-            id="cpf"
-            name="cpf"
-            v-model="cpf"
+            v-model="v$.Cpf.$model"
             placeholder="Digite seu CPF aqui"
           />
         </div>
-      </form>
-    </div>
-  </CardItem>
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.Cpf.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+    </CardItem>
 
-  <CardItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>CEP</template>
-    <div>
-      <form id="contato-form">
+    <!-- -------------------------------------------------- -->
+    <!-- Icone -->
+
+    <CardItem>
+      <template #icon>
+        <SupportIcon />
+      </template>
+
+      <!-- CEP-->
+
+      <template #heading>CEP</template>
+      <div class="form-group">
         <div class="imput-container">
-          <label for="nome"> Sua localização no mapa é: {{ cep }}</label>
+          <label for=""> Sua localização no mapa é: {{ Cep }}</label>
           <input
             type="text"
-            id="cep"
-            name="cep"
-            v-model="cep"
+            v-model="v$.Cep.$model"
             placeholder="Digite seu CEP aqui"
           />
         </div>
-      </form>
-    </div>
-  </CardItem>
+      </div>
+      <div
+        class="input-errors"
+        v-for="(error, index) of v$.Cep.$errors"
+        :key="index"
+      >
+        <div class="error-msg">{{ error.$message }}</div>
+      </div>
+    </CardItem>
 
-  <CardItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <div>
-      <form id="contato-form">
-        <div class="imput-container">
-          <input type="submit" class="submit-btn" value="Salvar Contato" />
-        </div>
-      </form>
-    </div>
-  </CardItem>
+    <CardItem>
+      <template #icon>
+        <SupportIcon />
+      </template>
+      <div>
+        <form id="contato-form">
+          <div class="imput-container">
+            <input type="submit" class="submit-btn" value="Salvar Contato" />
+          </div>
+        </form>
+      </div>
+    </CardItem>
+  </form>
 </template>
 
 <script lang="ts">
 import { ref } from "vue";
+import CardItem from "@/components/CardItem.vue";
+import DocumentationIcon from "@/components/icons/IconDocumentation.vue";
+import ToolingIcon from "@/components/icons/IconTooling.vue";
+import EcosystemIcon from "@/components/icons/IconEcosystem.vue";
+import CommunityIcon from "@/components/icons/IconCommunity.vue";
+import SupportIcon from "@/components/icons/IconSupport.vue";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
-  email,
   numeric,
-  minLength,
+  between,
+  email,
   maxLength,
 } from "@vuelidate/validators";
 
-const nome = ref("");
-const sobrenome = ref("");
-/*const email = ref("");*/
-const idade = ref("");
-const telefone = ref("");
-const cpf = ref("");
-const cep = ref("");
+export function validName(PrimeiroNome: string) {
+  let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+  if (validNamePattern.test(PrimeiroNome)) {
+    return true;
+  }
+  return false;
+}
+
+const PrimeiroNome = ref("");
+const Sobrenome = ref("");
+const Email = ref("");
+const Idade = ref("");
+const Telefone = ref("");
+const Cpf = ref("");
+const Cep = ref("");
 
 export default {
   setup() {
@@ -219,31 +299,60 @@ export default {
       v$: useVuelidate(),
     };
   },
-
   data() {
     return {
-      nome: "",
-      sobrenome: "",
-      email: "",
-      idade: "",
-      telefone: "",
-      cpf: "",
-      cep: "",
+      CardItem,
+      DocumentationIcon,
+      ToolingIcon,
+      EcosystemIcon,
+      CommunityIcon,
+      SupportIcon,
+      PrimeiroNome: "",
+      Sobrenome: "",
+      Email: "",
+      Idade: "",
+      Telefone: "",
+      Cpf: "",
+      Cep: "",
     };
   },
   validations() {
     return {
-      nome: { required },
-      sobrenome: { required },
-      email: { required, email },
-      idade: {
-        numeric,
-        minLengthValue: minLength(1),
-        maxLengthValue: maxLength(120),
+      PrimeiroNome: {
+        required,
+        name_validation: {
+          $validator: validName,
+          $message: "Nome Invalido. Nome vallido deve conter letras e espaços",
+        },
       },
-      telefone: { required },
-      cpf: { required },
-      cep: { required },
+      Sobrenome: {
+        required,
+        name_validation: {
+          $validator: validName,
+          $message:
+            "Sobrenome Invalido.Sobrenome valido de conter letras e espaços ",
+        },
+      },
+      Email: {
+        required,
+        email,
+        email_validation: {
+          //colocar regex de email
+          $message: "Email Invalido",
+        },
+      },
+      Idade: {
+        required,
+        numeric,
+        betweenValue: between(0, 120),
+      },
+      Telefone: {
+        required,
+        numeric,
+        maxLengthValue: maxLength(9),
+      },
+      Cpf: { required },
+      Cep: { required },
     };
   },
 };
@@ -255,7 +364,6 @@ export default {
   flex-direction: column;
   margin-bottom: 5px;
 }
-
 label {
   font-weight: bold;
   margin-bottom: 5px;
@@ -263,13 +371,11 @@ label {
   padding: 5px 5px;
   border-left: 4px solid #fcba03;
 }
-
 input {
   padding: 5px 5px;
   width: auto;
   border-radius: 5px;
 }
-
 .submit-btn {
   background-color: #222;
   color: #fcba03;
